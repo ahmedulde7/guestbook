@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: java-guestbook-frontend
+        image: ahmedulde/guestbook-frontend-demo
         ports:
         - name: http-server
           containerPort: 8080
