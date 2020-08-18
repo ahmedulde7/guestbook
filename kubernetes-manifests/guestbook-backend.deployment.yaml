@@ -26,7 +26,7 @@ spec:
           - until (mongo --host java-guestbook-mongodb:27017 >/dev/null) do echo "Waiting for connection for 2 sec."; sleep 2; done
       containers:
       - name: backend
-        image: java-guestbook-backend
+        image: ahmedulde/guestbook-backend-demo
         ports:
         - name: http-server
           containerPort: 8080
