@@ -27,7 +27,7 @@ spec:
 
     stage('FrontEnd') {
       environment {
-        GIT_CREDS = credentials('git')
+        GIT_CREDS = credentials('GithubLogin')
       }
       steps {
         container('dind') {
