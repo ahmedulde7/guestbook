@@ -26,16 +26,21 @@ spec:
   stages {
 
     stage('FrontEnd') {
+      environment {
+        GIT_CREDS = credentials('git')
+      }
       steps {
         container('dind') {
         // Build new image  
-          sh "apk update && apk add git"
-          sh "git clone https://github.com/ahmedulde7/guestbook.git"
-          sh "pwd"
-          sh "docker login -u ahmedulde -p Cooldude@007 "
-          sh "until docker ps; do sleep 3; done && cd guestbook/frontend && docker build -t ahmedulde/guestbook-frontend-demo:latest ."
-        // Publish new image
-          sh "docker push ahmedulde/guestbook-frontend-demo:latest"
+        sh "echo $GIT_CREDS"
+        sh "echo ${env.GIT_COMMIT}"
+        //   sh "apk update && apk add git"
+        //   sh "git clone https://github.com/ahmedulde7/guestbook.git"
+        //   sh "pwd"
+        //   sh "docker login -u ahmedulde -p Cooldude@007 "
+        //   sh "until docker ps; do sleep 3; done && cd guestbook/frontend && docker build -t ahmedulde/guestbook-frontend-demo:latest ."
+        // // Publish new image
+        //   sh "docker push ahmedulde/guestbook-frontend-demo:latest"
           
         }
       }
