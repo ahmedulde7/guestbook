@@ -40,20 +40,29 @@ spec:
         GIT_CREDS = credentials('GithubLogin')
       }
       steps {
-        container('tools') {
-        // Build new image  
+        container('dind') {
+          // Build new image  
+          sh "apk update && apk add git"
+          sh "git clone https://github.com/ahmedulde7/guestbook.git"
+          sh "pwd"
+          sh "docker login -u ahmedulde -p Cooldude@007"
+          sh "until docker ps; do sleep 3; done && cd guestbook/frontend && docker build -t ahmedulde/guestbook-frontend-demo:${env.GIT_COMMIT} ."
+          // Publish new image
+          sh "docker push ahmedulde/guestbook-frontend-demo:${env.GIT_COMMIT}"
+        }
+      }
+    }
+
+    stage('Trigger ArgoCD') {
+      environment {
+        GIT_CREDS = credentials('GithubLogin')
+      }
+      container('tools') {
         sh "echo $GIT_CREDS"
         sh "echo ${env.GIT_COMMIT}"
         sh "kustomize version"
-        //   sh "apk update && apk add git"
-        //   sh "git clone https://github.com/ahmedulde7/guestbook.git"
-        //   sh "pwd"
-        //   sh "docker login -u ahmedulde -p Cooldude@007 "
-        //   sh "until docker ps; do sleep 3; done && cd guestbook/frontend && docker build -t ahmedulde/guestbook-frontend-demo:latest ."
-        // // Publish new image
-        //   sh "docker push ahmedulde/guestbook-frontend-demo:latest"
-          
-        }
+        sh "cd kubernetes-manifests && kustomize edit set image ahmedulde/guestbook-frontend-demo:${env.GIT_COMMIT}"
+        sh "git commit -am 'Publish new version' && git push || echo 'no changes'"
       }
     }
   }
