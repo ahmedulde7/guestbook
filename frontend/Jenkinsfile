@@ -62,7 +62,7 @@ spec:
           sh "echo $GIT_CREDS"
           sh "echo ${env.GIT_COMMIT}"
           sh "kustomize version"
-          sh "cd kubernetes-manifests && kustomize edit set image ahmedulde/guestbook-frontend-demo:${env.GIT_COMMIT}"
+          sh "cd dev && kustomize edit set image ahmedulde/guestbook-frontend-demo:${env.GIT_COMMIT}"
           sh "git commit -am 'Publish new version' && git push || echo 'no changes'"
         }
       }
