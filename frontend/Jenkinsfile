@@ -20,6 +20,16 @@ spec:
     command:
     - cat
     tty: true
+  - name: tools
+    env:
+    - name: DOCKER_HOST
+      value: 127.0.0.1
+    image: ahmedulde/argo-cd-ci-builder
+    command:
+    - cat
+    tty: true
+  imagePullSecrets:
+  - name: regcred    
 """
     }
   }
@@ -30,11 +40,10 @@ spec:
         GIT_CREDS = credentials('GithubLogin')
       }
       steps {
-        container('dind') {
+        container('tools') {
         // Build new image  
         sh "echo $GIT_CREDS"
         sh "echo ${env.GIT_COMMIT}"
-        sh "curl -s https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh  | bash"
         sh "kustomize version"
         //   sh "apk update && apk add git"
         //   sh "git clone https://github.com/ahmedulde7/guestbook.git"
