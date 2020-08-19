@@ -40,45 +40,5 @@ spec:
         }
       }
     }
-      
-    stage('BackEnd') {
-        steps{
-        container('dind'){
-              sh "docker login -u ahmedulde -p Cooldude@007 "
-              sh "until docker ps; do sleep 3; done && cd guestbook/backend && docker build -t ahmedulde/guestbook-backend-demo:latest ."
-              sh "docker push ahmedulde/guestbook-backend-demo:latest"
-                }
-            }
-        }  
-    
-
-    // stage('Deploy E2E') {
-    //   environment {
-    //     GIT_CREDS = credentials('git')
-    //   }
-    //   steps {
-    //     container('tools') {
-    //       sh "git clone https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/alexmt/argocd-demo-deploy.git"
-    //       sh "git config --global user.email 'ci@ci.com'"
-
-    //       dir("argocd-demo-deploy") {
-    //         sh "cd ./e2e && kustomize edit set image alexmt/argocd-demo:${env.GIT_COMMIT}"
-    //         sh "git commit -am 'Publish new version' && git push || echo 'no changes'"
-    //       }
-    //     }
-    //   }
-    // }
-
-    // stage('Deploy to Prod') {
-    //   steps {
-    //     input message:'Approve deployment?'
-    //     container('tools') {
-    //       dir("argocd-demo-deploy") {
-    //         sh "cd ./prod && kustomize edit set image alexmt/argocd-demo:${env.GIT_COMMIT}"
-    //         sh "git commit -am 'Publish new version' && git push || echo 'no changes'"
-    //       }
-    //     }
-    //   }
-    // }
   }
 }
