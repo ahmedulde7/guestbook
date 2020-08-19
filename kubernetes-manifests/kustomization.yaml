@@ -3,3 +3,8 @@ kind: Kustomization
 
 resources:
 - ./guestbook-frontend.deployment.yaml
+- ./guestbook-frontend.service.yaml
+- ./guestbook-backend.deployment.yaml
+- ./guestbook-backend.service.yaml
+- ./guestbook-mongodb.deployment.yaml
+- ./guestbook-mongodb.service.yaml
