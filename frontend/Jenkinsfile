@@ -34,6 +34,8 @@ spec:
         // Build new image  
         sh "echo $GIT_CREDS"
         sh "echo ${env.GIT_COMMIT}"
+        sh "curl -s https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh  | bash"
+        sh "kustomize version"
         //   sh "apk update && apk add git"
         //   sh "git clone https://github.com/ahmedulde7/guestbook.git"
         //   sh "pwd"
