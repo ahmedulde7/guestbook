@@ -62,6 +62,8 @@ spec:
           sh "echo $GIT_CREDS"
           sh "echo ${env.GIT_COMMIT}"
           sh "kustomize version"
+          sh "git config --global user.email \"ahmedulde7@gmail.com\"" 
+          sh "git config --global user.email \"ahmedulde7\"" 
           sh "cd dev && kustomize edit set image ahmedulde/guestbook-frontend-demo:${env.GIT_COMMIT}"
           sh "git commit -am 'Publish new version' && git push || echo 'no changes'"
         }
