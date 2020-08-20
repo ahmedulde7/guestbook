@@ -37,13 +37,13 @@ spec:
 
     stage('FrontEnd') {
       environment {
-        GIT_CREDS = credentials('GithubLogin')
+        GIT_CREDS = credentials('urlencodedpassword')
       }
       steps {
         container('dind') {
           // Build new image  
           sh "apk update && apk add git"
-          sh "git clone https://ahmedulde7:Cooldude%40007@github.com/ahmedulde7/guestbook.git"
+          sh "git clone https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/ahmedulde7/guestbook.git"
           sh "pwd"
           sh "docker login -u ahmedulde -p Cooldude@007"
           sh "until docker ps; do sleep 3; done && cd guestbook/frontend && docker build -t ahmedulde/guestbook-frontend-demo:${env.GIT_COMMIT} ."
@@ -55,7 +55,7 @@ spec:
 
     stage('Trigger ArgoCD') {
       environment {
-        GIT_CREDS = credentials('GithubLogin')
+        GIT_CREDS = credentials('urlencodedpassword')
       }
       steps{
         container('tools') {
@@ -63,11 +63,11 @@ spec:
           sh "echo ${env.GIT_COMMIT}"
           sh "kustomize version"
           sh "rm -rf guestbook"
-          sh "git clone https://ahmedulde7:Cooldude%40007@github.com/ahmedulde7/guestbook-deploy.git"
+          sh "git clone https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/ahmedulde7/guestbook-deploy.git"
           sh "cd guestbook-deploy/kubernetes-manifests/overlays/dev && kustomize edit set image ahmedulde/guestbook-frontend-demo:${env.GIT_COMMIT}"
           sh "pwd"
           sh "cd guestbook-deploy && git config --global user.name \"ahmedulde7\" && git config --global user.email \"ahmedulde7@gmail.com\""
-          sh "cd guestbook-deploy && git remote rm origin && git remote add origin https://ahmedulde7:Cooldude%40007@github.com/ahmedulde7/guestbook-deploy.git"
+          sh "cd guestbook-deploy && git remote rm origin && git remote add origin https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/ahmedulde7/guestbook-deploy.git"
           sh "cd guestbook-deploy && git commit -am \"Publish new version\" && git push origin HEAD:master"
           sh "echo \"Argo CD will be triggered now\""
         }
