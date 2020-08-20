@@ -44,11 +44,11 @@ spec:
           // Build new image  
           sh "apk update && apk add git"
           sh "git clone https://ahmedulde7:Cooldude%40007@github.com/ahmedulde7/guestbook.git"
-          sh "pwd"
-          sh "docker login -u ahmedulde -p Cooldude@007"
-          sh "until docker ps; do sleep 3; done && cd guestbook/frontend && docker build -t ahmedulde/guestbook-frontend-demo:${env.GIT_COMMIT} ."
-          // Publish new image
-          sh "docker push ahmedulde/guestbook-frontend-demo:${env.GIT_COMMIT}"
+          // sh "pwd"
+          // sh "docker login -u ahmedulde -p Cooldude@007"
+          // sh "until docker ps; do sleep 3; done && cd guestbook/frontend && docker build -t ahmedulde/guestbook-frontend-demo:${env.GIT_COMMIT} ."
+          // // Publish new image
+          // sh "docker push ahmedulde/guestbook-frontend-demo:${env.GIT_COMMIT}"
         }
       }
     }
@@ -63,7 +63,8 @@ spec:
           sh "echo ${env.GIT_COMMIT}"
           sh "kustomize version"
           sh "cd kubernetes-manifests/overlays/dev && kustomize edit set image ahmedulde/guestbook-frontend-demo:${env.GIT_COMMIT}"
-          sh "git commit -am \"Publish new version\" && git push origin HEAD:master"
+          sh "git remote -v"
+          sh "git config --global user.email \"ahmedulde7@gmail.com\" && git config --global user.name \"ahmedulde7\" && git commit -am \"Publish new version\" && git push origin HEAD:master"
           sh "sleep 3"
         }
       }
