@@ -64,9 +64,9 @@ spec:
           sh "kustomize version"
           sh "git config --global user.email \"ahmedulde7@gmail.com\"" 
           sh "git config --global user.name \"ahmedulde7\"" 
-          sh "cd dev && kustomize edit set image ahmedulde/guestbook-frontend-demo:${env.GIT_COMMIT}"
+          sh "cd kubernetes-manifests/overlays/dev && kustomize edit set image ahmedulde/guestbook-frontend-demo:${env.GIT_COMMIT}"
           sh "git add ."
-          sh "git commit -m \"Publish new version\" && git push origin HEAD:master|| echo 'no changes'"
+          sh "git commit -m \"Publish new version\" && git push origin master"
         }
       }
     }
