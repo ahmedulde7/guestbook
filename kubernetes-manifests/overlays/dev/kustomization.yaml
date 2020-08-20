@@ -5,8 +5,11 @@ kind: Kustomization
 patchesStrategicMerge:
 - ./guestbook-frontend.deployment-patch.yaml
 
+resources:
+  - ../../
+
 images:
 - name: ahmedulde/guestbook-frontend-demo
   newTag: testing
-resources:
-- ../kubernetes-manifests
+
+
