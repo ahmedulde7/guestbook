@@ -66,6 +66,7 @@ spec:
           sh "git config --global user.name \"ahmedulde7\"" 
           sh "cd kubernetes-manifests/overlays/dev && kustomize edit set image ahmedulde/guestbook-frontend-demo:${env.GIT_COMMIT}"
           sh "git add ."
+          sh "git remote add origin https://github.com/ahmedulde7/guestbook.git"
           sh "git commit -m \"Publish new version\" && git push origin master"
         }
       }
