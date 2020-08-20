@@ -6,13 +6,13 @@ patchesStrategicMerge:
 - ./guestbook-frontend.deployment-patch.yaml
 
 resources:
-  - ../../base/guestbook-frontend.deployment.yaml
-  - ../../base/guestbook-frontend.service.yaml
-  - ../../base/guestbook-backend.deployment.yaml
-  - ../../base/guestbook-backend.service.yaml
-  - ../../base/guestbook-mongodb.deployment.yaml
-  - ../../base/guestbook-mongodb.service.yaml
+- ../../base/guestbook-frontend.deployment.yaml
+- ../../base/guestbook-frontend.service.yaml
+- ../../base/guestbook-backend.deployment.yaml
+- ../../base/guestbook-backend.service.yaml
+- ../../base/guestbook-mongodb.deployment.yaml
+- ../../base/guestbook-mongodb.service.yaml
 
 images:
 - name: ahmedulde/guestbook-frontend-demo
-  newTag: 5ae5104ab7edbca2280f66dad4c10a939672d8e2
+  newTag: 663513ba33b9ba58e1e564f1233fbd0a56a0cf70
