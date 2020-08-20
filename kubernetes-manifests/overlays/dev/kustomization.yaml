@@ -8,10 +8,12 @@ patchesStrategicMerge:
   - ./guestbook-frontend.deployment-patch.yaml
 
 resources:
+<<<<<<< HEAD
   - ../../base
+=======
+- ../../
+>>>>>>> 5c26a4a4e3dd6c52d636afa3462050b8d7198ac2
 
 images:
 - name: ahmedulde/guestbook-frontend-demo
-  newTag: testing
-
-
+  newTag: 453d6c40b7722951c1f009754959cff86adc9e67
