@@ -66,7 +66,7 @@ spec:
           sh "git clone https://ahmedulde7:Cooldude%40007@github.com/ahmedulde7/guestbook-deploy.git"
           sh "cd guestbook-deploy/kubernetes-manifests/overlays/dev && kustomize edit set image ahmedulde/guestbook-frontend-demo:${env.GIT_COMMIT}"
           sh "pwd"
-          sh "cd guestbook-deploy && git config --global user.name \"ahmedulde7\" && git config --global \"ahmedulde7@gmail.com\""
+          sh "cd guestbook-deploy && git config --global user.name \"ahmedulde7\" && git config --global user.email \"ahmedulde7@gmail.com\""
           sh "cd guestbook-deploy && git remote rm origin && git remote add origin https://ahmedulde7:Cooldude%40007@github.com/ahmedulde7/guestbook-deploy.git"
           sh "cd guestbook-deploy && git commit -am \"Publish new version\" && git push origin HEAD:master"
           sh "echo \"Argo CD will be triggered now\""
