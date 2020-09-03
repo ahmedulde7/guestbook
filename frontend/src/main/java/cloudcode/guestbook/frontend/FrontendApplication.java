@@ -19,6 +19,8 @@ public class FrontendApplication {
                 System.exit(1);
             }
         }
+
+        //Starting spring boot app
         SpringApplication.run(FrontendApplication.class, args);
     }
 

@@ -14,11 +14,16 @@ import java.net.URISyntaxException;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.client.RestTemplate;
 
+import io.prometheus.client.Counter;
+
+
 /**
  * defines the REST endpoints managed by the server.
  */
 @Controller
 public class FrontendController {
+
+    static final Counter requests = Counter.build().name("requests_total").help("Total requests.").register();
 
     private String backendUri = String.format("http://%s/messages",
         System.getenv("GUESTBOOK_API_ADDR"));
@@ -34,6 +39,9 @@ public class FrontendController {
         GuestBookEntry[] response = restTemplate.getForObject(backendUri,
             GuestBookEntry[].class);
         model.addAttribute("messages", response);
+
+        requests.inc();
+
         return "home";
     }
 
